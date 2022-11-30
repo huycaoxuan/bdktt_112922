@@ -24,7 +24,6 @@ function UpData () {
     0,
     0
     )
-    basic.pause(100)
 }
 radio.setGroup(1)
 let so = 101
@@ -62,10 +61,7 @@ basic.forever(function () {
         }
         UpData()
         basic.showNumber(1)
-        pins.digitalWritePin(DigitalPin.P8, 1)
-        basic.pause(100)
-        pins.digitalWritePin(DigitalPin.P8, 0)
-        basic.pause(100)
+        warning()
     } else if (pins.analogReadPin(AnalogPin.P1) <= 100) {
         if (so == 100) {
             radio.sendNumber(2)
@@ -82,18 +78,7 @@ basic.forever(function () {
         warning()
     } else {
         if (countNumber == delayTime) {
-            ESP8266ThingSpeak.connectThingSpeak(
-            "api.thingspeak.com",
-            "IBUNGIC5TDVJ75DV",
-            pins.analogReadPin(AnalogPin.P0),
-            pins.analogReadPin(AnalogPin.P1),
-            pins.analogReadPin(AnalogPin.P2),
-            0,
-            0,
-            0,
-            0,
-            0
-            )
+            UpData()
             basic.pause(10)
             countNumber = 0
         } else if (countNumber < delayTime) {
@@ -108,12 +93,12 @@ basic.forever(function () {
         if (so > 100) {
             so = 100
             radio.sendNumber(so)
-            basic.showString("Auto")
+            basic.showString("A")
             basic.pause(500)
         } else {
             so = 101
             radio.sendNumber(so)
-            basic.showString("Manual")
+            basic.showString("M")
             basic.pause(500)
         }
     }
