@@ -36,8 +36,8 @@ while (trialNum > 0 && !(ESP8266ThingSpeak.isWifiConnected())) {
     SerialPin.P15,
     SerialPin.P14,
     BaudRate.BaudRate115200,
-    "haanh",
-    "Haminh101"
+    "Tenda_02C492",
+    "12765597"
     )
     trialNum += -1
     basic.pause(2000)
@@ -55,6 +55,7 @@ if (ESP8266ThingSpeak.isWifiConnected()) {
 let countNumber = 0
 let delayTime = 2 * 1000 / 10
 basic.forever(function () {
+    // Chu y: Thay doi thong so nguong cua cam biem
     if (pins.analogReadPin(AnalogPin.P0) <= 100) {
         if (so == 100) {
             radio.sendNumber(1)
